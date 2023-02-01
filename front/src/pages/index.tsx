@@ -3,12 +3,16 @@ import type { NextPage } from "next"
 
 import { Bell, BellBadge } from "@/components/Bells"
 import styles from "../styles/Home.module.css"
+import { socket } from "@/apis/socket"
 
 const Home: NextPage = () => {
   const [onAir, setOnAir] = useState(false)
+  const [connected, setConnected] = useState(false)
 
   const handleClick = () => {
-    setOnAir((prev) => !prev)
+    socket.on("connect", () => {
+      setConnected(true)
+    })
   }
 
   return (
@@ -16,6 +20,7 @@ const Home: NextPage = () => {
       <button className={styles.button} onClick={handleClick}>
         {onAir ? <BellBadge /> : <Bell />}
       </button>
+      <p>{connected}</p>
     </div>
   )
 }
