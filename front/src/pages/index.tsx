@@ -16,27 +16,16 @@ const Home: NextPage = () => {
       return
     }
 
-    socket.off("alerts")
-    setAlerts([])
+    if (socket.hasListeners("alerts")) {
+      socket.off("alerts")
+      setAlerts([])
+    }
   }
 
   useEffect(() => {
-    socket.on("connect", () => {
-      console.log("badge connect")
-      socket.emit("new_alert")
-    })
-
-    socket.on("new_alert", (data: true) => {
-      console.log("new_alert", data)
-      if (!onAir) {
-        setOnAir(true)
-      }
-    })
-
-    socket.on("alerts", (data: string[]) => {
-      console.log("alerts", data)
-      setAlerts(data)
-    })
+    // badge namespace connect and emit new_alert
+    // on new_alert event
+    // on alerts event
   }, [])
 
   return (
