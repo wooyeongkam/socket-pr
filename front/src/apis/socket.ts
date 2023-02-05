@@ -1,5 +1,5 @@
 import { Manager } from "socket.io-client"
 
-const manager = new Manager("http://localhost:3001")
+const manager = new Manager("http://localhost:8080")
 
-export const socket = manager.socket("/chat?username=KAM")
+export const socket = manager.socket("/badge")

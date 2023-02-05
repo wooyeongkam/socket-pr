@@ -1,6 +1,7 @@
 .box {
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -10,4 +11,9 @@
   border: none;
 
   cursor: pointer;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
 }
