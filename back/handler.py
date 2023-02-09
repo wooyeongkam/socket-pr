@@ -1,5 +1,4 @@
 from redis import client
-import json
 import time
 
 async def new_alert_handler(redis: client.Redis, channel: client.PubSub, sio, event, namespace):

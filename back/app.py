@@ -4,6 +4,7 @@ import socketio
 from aiohttp import web
 from handler import new_alert_handler, alerts_handler
 from redis_config import redis, redis_pubsub
+from alert_namespace import AlertNamespace
 
 sio = socketio.AsyncServer(cors_allowed_origins="*")
 app = web.Application()
@@ -13,6 +14,7 @@ NEW_ALERT_CHANNEL = "alert_channel"
 BADGE_NSP = "/badge"
 BADGE_NEW_ALERT_EVENT = "new_alert"
 BADGE_ALERTS_EVENT = "alerts"
+
 
 @sio.event(namespace=BADGE_NSP)
 def connect(sid, eviron):
@@ -31,6 +33,11 @@ async def new_alert_channel_handler(sid):
 @sio.on(BADGE_ALERTS_EVENT, namespace= BADGE_NSP)
 async def alerts_socket_handler(sid):
     await alerts_handler(redis, sio, BADGE_ALERTS_EVENT, BADGE_NSP)
+
+
+### class base namespace 
+
+# sio.register_namespace(AlertNamespace(BADGE_NSP, redis, redis_pubsub, sio, NEW_ALERT_CHANNEL))
 
 
 if __name__ == '__main__':

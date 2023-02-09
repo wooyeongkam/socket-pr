@@ -9,23 +9,18 @@ const Home: NextPage = () => {
   const [onAir, setOnAir] = useState(false)
   const [alerts, setAlerts] = useState<string[]>([])
 
-  const handleClick = () => {
-    if (onAir) {
-      setOnAir(false)
-      socket.emit("alerts")
-      return
-    }
-
-    if (socket.hasListeners("alerts")) {
-      socket.off("alerts")
-      setAlerts([])
-    }
-  }
+  const handleClick = () => {}
 
   useEffect(() => {
     // badge namespace connect and emit new_alert
+
     // on new_alert event
+
     // on alerts event
+
+    return () => {
+      socket.disconnect()
+    }
   }, [])
 
   return (
