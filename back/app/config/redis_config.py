@@ -1,4 +1,4 @@
-from aioredis import Redis
+from redis.asyncio import Redis
 
 REDIS_HOST = 'redis-17979.c256.us-east-1-2.ec2.cloud.redislabs.com'
 REDIS_PASSWORD = 'LiK1wqItmgBNwscwJxemliEA1RtnLZ0E'
@@ -10,7 +10,3 @@ redis = Redis(
   password=REDIS_PASSWORD,
   decode_responses=True
 )
-
-redis_pubsub = redis.pubsub()
-
-

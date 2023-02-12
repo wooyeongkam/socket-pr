@@ -7,7 +7,7 @@
     "babelrc": "node other/generate-babelrc.js",
     "clean:babelrc": "rimraf .babelrc",
     "dev": "next dev",
-    "build": "next build",
+    "prestart": "next build",
     "start": "next start",
     "lint": "eslint --ignore-path .gitignore --fix .",
     "test": "jest",

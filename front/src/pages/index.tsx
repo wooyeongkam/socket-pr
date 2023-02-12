@@ -1,25 +1,29 @@
 import { useEffect, useState } from "react"
 import type { NextPage } from "next"
 
-import { Bell, BellBadge } from "@/components/Bells"
-import styles from "../styles/Home.module.css"
 import { socket } from "@/apis/socket"
+import { Bell, BellBadge } from "@/components/bells"
+import { AlertList } from "@/components/alert-list"
+import styles from "../styles/Home.module.css"
 
 const Home: NextPage = () => {
   const [onAir, setOnAir] = useState(false)
-  const [alerts, setAlerts] = useState<string[]>([])
+  const [isOpenList, setIsOpenList] = useState(false)
 
-  const handleClick = () => {}
+  const handleClick = () => {
+    setOnAir(false)
+    setIsOpenList((value) => !value)
+  }
 
   useEffect(() => {
-    // badge namespace connect and emit new_alert
+    // badge namespace socket connect
+
+    // badge namespace connect event
 
     // on new_alert event
 
-    // on alerts event
-
     return () => {
-      socket.disconnect()
+      // badge namespace socket disconnect
     }
   }, [])
 
@@ -28,11 +32,7 @@ const Home: NextPage = () => {
       <button className={styles.button} onClick={handleClick}>
         {onAir ? <BellBadge /> : <Bell />}
       </button>
-      <div className={styles.list}>
-        {alerts.map((alert, index) => (
-          <div key={alert.length + index}>{alert}</div>
-        ))}
-      </div>
+      {isOpenList && <AlertList />}
     </div>
   )
 }
